@@ -1,0 +1,7 @@
+<?php
+return array(
+	'zfcuser' => array(
+		'field_name_email' => 'email',
+		'field_name_identity' => 'username'
+	)
+);
