@@ -1,7 +1,41 @@
 <?php
-/**
- * This file is placed here for compatibility with ZendFramework 2's ModuleManager.
- * It allows usage of this module even without composer.
- * The original Module.php is in 'src/SamUser' in order to respect PSR-0
- */
-require_once __DIR__ . '/src/SamUser/Module.php';
+namespace RumeauLib;
+
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+
+class Module implements AutoloaderProviderInterface
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/', __NAMESPACE__),
+                ),
+            ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'zfcuser_module_options' => function ($serviceManager) {
+                    $config = $serviceManager->get('Configuration');
+                    return new Options\ZfcUserModuleOptions(isset($config['zfcuser']) ? $config['zfcuser'] : array());
+                },
+                'zfcuser_user_mapper' => function ($serviceManager) {
+                    return new Mappper\User(
+                        $serviceManager->get('zfcuser_doctrine_em'),
+                        $serviceManager->get('zfcuser_module_options')
+                    );
+                },
+            ),
+        );
+    }
+}
