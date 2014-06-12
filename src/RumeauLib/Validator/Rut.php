@@ -1,16 +1,38 @@
 <?php
+/**
+ * RumeauLib (https://github.com/rumeau/rumeaulib)
+ *
+ * @link      https://github.com/rumeau/rumeaulib for the canonical source repository
+ * @copyright Copyright (c)
+ * @license   http://opensource.org/licenses/MIT MIT License
+ */
 namespace RumeauLib\Validator;
 
 use Zend\Validator\AbstractValidator;
 
+/**
+ * Class Rut
+ * Validate a RUT
+ *
+ * @package RumeauLib\Validator
+ */
 class Rut extends AbstractValidator
 {
+    /**
+     * Invalid minimum RUT
+     */
     const RUT_MIN_INVALID = 'rutMinInvalid';
+    /**
+     * Invalid maximum RUT
+     */
     const RUT_MAX_INVALID = 'rutMaxInvalid';
+    /**
+     * RUT format is invalid
+     */
     const RUT_INVALID     = 'rutInvalid';
 
     /**
-     * @var array
+     * @var array Array of messages
      */
     protected $messageTemplates = array(
         self::RUT_MIN_INVALID => 'El RUT ingresado es menor que %min%',
@@ -19,33 +41,45 @@ class Rut extends AbstractValidator
     );
 
     /**
-     * Valor minimo del RUT
+     * Minimum value of RUT
      *
      * @var int
      */
-    protected $min = false;
+    protected $min;
 
     /**
-     * Valor maximo del RUT
+     * Maximum value of RUT
      *
      * @var int
      */
-    protected $max = false;
+    protected $max;
 
     /**
-     * Validar que el minimo y maximo sean inclusivos
+     * Include min and max in validation
      *
      * @var boolean
      */
     protected $inclusive = false;
 
     /**
-     * @var array
+     * RUT Checksum characters
+     *
+     * @var array Array of valid checksums
      */
     protected $checksumChars = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'k');
 
     /**
-     * Establece el valor minimo del rut
+     * Get the minimum value
+     *
+     * @return int
+     */
+    public function getMin()
+    {
+        return $this->min;
+    }
+
+    /**
+     * Set the minimum value
      *
      * @param  int $min
      *
@@ -59,19 +93,19 @@ class Rut extends AbstractValidator
     }
 
     /**
-     * Obtiene el valor minimo del rut
+     * Get the maximum value
      *
      * @return int
      */
-    public function getMin()
+    public function getMax()
     {
-        return $this->min;
+        return $this->max;
     }
 
     /**
-     * Establece el valor maximo del rut
+     * Set the maximum value
      *
-     * @param int
+     * @param int $max
      *
      * @return Rut
      */
@@ -83,19 +117,19 @@ class Rut extends AbstractValidator
     }
 
     /**
-     * Obtiene el valor maximo del rut
+     * Get inclusive comparison flag
      *
-     * @return int
+     * @return boolean
      */
-    public function getMax()
+    public function getInclusive()
     {
-        return $this->max;
+        return $this->inclusive;
     }
 
     /**
-     * Establece la comparasion inclusiva
+     * Set inclusive comparison flag
      *
-     * @param boolean
+     * @param boolean $inclusive
      *
      * @return Rut
      */
@@ -107,17 +141,7 @@ class Rut extends AbstractValidator
     }
 
     /**
-     * Obtiene el tipo de comparasion
-     *
-     * @return boolean
-     */
-    public function getInclusive()
-    {
-        return $this->inclusive;
-    }
-
-    /**
-     * Valida un RUT
+     * Validates a RUT
      *
      * @param string $value
      *
@@ -150,7 +174,7 @@ class Rut extends AbstractValidator
             return false;
         }
 
-        // Calcular DV
+        // Calculate Checksum
         $d = 1;
         for ($x = 0; $rut != 0; $rut /= 10) {
             $d = ($d + $rut % 10 * (9 - $x++ % 6)) % 11;
@@ -167,9 +191,9 @@ class Rut extends AbstractValidator
     }
 
     /**
-     * Valida que el RUT no sea menor que el minimo
+     * Validate min RUT value
      *
-     * @param int
+     * @param int $rut
      *
      * @return boolean
      */
@@ -193,9 +217,9 @@ class Rut extends AbstractValidator
     }
 
     /**
-     * Valida que el RUT no sea mayor que el maximo
+     * Validate max RUT value
      *
-     * @param int
+     * @param int $rut
      *
      * @return boolean
      */

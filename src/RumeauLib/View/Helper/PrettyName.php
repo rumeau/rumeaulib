@@ -1,4 +1,11 @@
 <?php
+/**
+ * RumeauLib (https://github.com/rumeau/rumeaulib)
+ *
+ * @link      https://github.com/rumeau/rumeaulib for the canonical source repository
+ * @copyright Copyright (c)
+ * @license   http://opensource.org/licenses/MIT MIT License
+ */
 namespace RumeauLib\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
@@ -6,16 +13,20 @@ use Zend\View\Exception;
 
 /**
  * Class PrettyName
+ * Beautifies a user name
+ * 
  * @package RumeauLib\View\Helper
  * @method string prettyname() prettyname(mixed $name, int $length = 1, bool $cutLast = true, string $termination = '.') Beautifies a user name
  */
 class PrettyName extends AbstractHelper
 {
     /**
-     * @param mixed  $name
-     * @param int    $length
-     * @param bool   $cutLast
-     * @param string $termination
+     * Display a user name in a formatted output
+     *
+     * @param array|string $name The user name as an array of parts or as a full string
+     * @param int    $length Number of parts to concatenate the user name. Default: 1
+     * @param bool   $cutLast Should the last part displayed be abbreviated. Default: true
+     * @param string $termination How to end the concatenation. Default: '.' (dot)
      *
      * @return string
      * @throws \Zend\View\Exception\InvalidArgumentException
