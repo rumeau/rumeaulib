@@ -1,7 +1,7 @@
 <?php
 namespace RumeauLib\View\Helper;
 
-use Zend\View\Helper\AbstractHelper
+use Zend\View\Helper\AbstractHelper;
 use Zend\View\Exception;
 
 class PrettyName extends AbstractHelper
