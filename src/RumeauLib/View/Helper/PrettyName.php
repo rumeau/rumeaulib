@@ -4,8 +4,22 @@ namespace RumeauLib\View\Helper;
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Exception;
 
+/**
+ * Class PrettyName
+ * @package RumeauLib\View\Helper
+ * @method string prettyname() prettyname(mixed $name, int $length = 1, bool $cutLast = true, string $termination = '.') Beautifies a user name
+ */
 class PrettyName extends AbstractHelper
 {
+    /**
+     * @param mixed  $name
+     * @param int    $length
+     * @param bool   $cutLast
+     * @param string $termination
+     *
+     * @return string
+     * @throws \Zend\View\Exception\InvalidArgumentException
+     */
     public function __invoke($name, $length = 1, $cutLast = true, $termination = '.')
     {
         if ($length < 1) {

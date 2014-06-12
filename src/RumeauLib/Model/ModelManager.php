@@ -52,7 +52,7 @@ class ModelManager extends AbstractPluginManager
      * Checks that the element is an instance of ElementInterface
      *
      * @param  mixed $plugin
-     * @throws Exception\InvalidElementException
+     * @throws Exception\InvalidModelException
      * @return void
      */
     public function validatePlugin($plugin)

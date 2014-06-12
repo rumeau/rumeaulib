@@ -1,11 +1,13 @@
 <?php
 namespace RumeauLib\Validator;
 
-class Rut
+use Zend\Validator\AbstractValidator;
+
+class Rut extends AbstractValidator
 {
     const RUT_MIN_INVALID = 'rutMinInvalid';
     const RUT_MAX_INVALID = 'rutMaxInvalid';
-    const RUT_INVALID = 'rutInvalid';
+    const RUT_INVALID     = 'rutInvalid';
 
     /**
      * @var array
@@ -13,7 +15,7 @@ class Rut
     protected $messageTemplates = array(
         self::RUT_MIN_INVALID => 'El RUT ingresado es menor que %min%',
         self::RUT_MAX_INVALID => 'El RUT ingresado es mayor que %max%',
-        self::RUT_INVALID => 'El RUT ingresado no es un URT valido'
+        self::RUT_INVALID     => 'El RUT ingresado no es un URT valido'
     );
 
     /**
@@ -40,12 +42,13 @@ class Rut
     /**
      * @var array
      */
-    protected $checksumChars = array(1, 2, 3, 4, 5, 6, 7, 8, 9, k);
+    protected $checksumChars = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'k');
 
     /**
      * Establece el valor minimo del rut
      *
      * @param  int $min
+     *
      * @return Rut
      */
     public function setMin($min)
@@ -69,6 +72,7 @@ class Rut
      * Establece el valor maximo del rut
      *
      * @param int
+     *
      * @return Rut
      */
     public function setMax($max)
@@ -92,11 +96,12 @@ class Rut
      * Establece la comparasion inclusiva
      *
      * @param boolean
+     *
      * @return Rut
      */
     public function setInclusive($inclusive)
     {
-        $this->inclusive = (bool) $inclusive;
+        $this->inclusive = (bool)$inclusive;
 
         return $this;
     }
@@ -114,7 +119,8 @@ class Rut
     /**
      * Valida un RUT
      *
-     * @param string
+     * @param string $value
+     *
      * @return boolean
      */
     public function isValid($value)
@@ -123,7 +129,7 @@ class Rut
         $this->setValue($value);
 
         $rut = substr($value, 0, -1);
-        $rut = (int) $rut;
+        $rut = (int)$rut;
         $dv  = substr($value, -1);
 
         if (!$this->checkMin($rut)) {
@@ -138,7 +144,7 @@ class Rut
             return false;
         }
 
-        if (!in_array($dv, $this->checksumChars) {
+        if (!in_array($dv, $this->checksumChars)) {
             $this->error(self::RUT_INVALID);
 
             return false;
@@ -147,7 +153,7 @@ class Rut
         // Calcular DV
         $d = 1;
         for ($x = 0; $rut != 0; $rut /= 10) {
-            $d = ($d + $rut % 10 * (9 - $x ++ % 6)) % 11;
+            $d = ($d + $rut % 10 * (9 - $x++ % 6)) % 11;
         }
 
         $calcDv = chr($d ? $d + 47 : 75);
@@ -164,6 +170,7 @@ class Rut
      * Valida que el RUT no sea menor que el minimo
      *
      * @param int
+     *
      * @return boolean
      */
     public function checkMin($rut)
@@ -173,11 +180,11 @@ class Rut
         }
 
         if ($this->inclusive) {
-            if ($this->min > $value) {
+            if ($this->min > $rut) {
                 return false;
             }
         } else {
-            if ($this->min >= $value) {
+            if ($this->min >= $rut) {
                 return false;
             }
         }
@@ -189,6 +196,7 @@ class Rut
      * Valida que el RUT no sea mayor que el maximo
      *
      * @param int
+     *
      * @return boolean
      */
     public function checkMax($rut)
@@ -202,7 +210,7 @@ class Rut
                 return false;
             }
         } else {
-            if $rut >= $this->max) {
+            if ($rut >= $this->max) {
                 return false;
             }
         }

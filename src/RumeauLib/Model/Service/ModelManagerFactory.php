@@ -4,6 +4,7 @@ namespace RumeauLib\Model\Service;
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\InitializableInterface;
+use RumeauLib\Model\ModelManager;
 use RumeauLib\Model\ModelInterface;
 use RumeauLib\Model\Exception;
 
@@ -15,7 +16,7 @@ class ModelManagerFactory extends AbstractPluginManagerFactory
      * Create and return the MVC controller plugin manager
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return FormElementManager
+     * @return ModelManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -32,7 +33,7 @@ class ModelManagerFactory extends AbstractPluginManagerFactory
      * Checks that the element is an instance of ModelInterface
      *
      * @param  mixed $plugin
-     * @throws Exception\InvalidElementException
+     * @throws Exception\InvalidModelException
      * @return void
      */
     public function validatePlugin($plugin)
