@@ -1,0 +1,19 @@
+{
+    "name": "rumeau/rumeaulib",
+    "type": "library",
+    "description": "Utility library for a ZF2 app",
+    "keywords": ["zf2","utility"],
+    "homepage": "http://github.com/rumeau/rumeaulib",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jean Rumeau",
+            "email": "rumeau@gmail.com",
+            "homepage": "http://www.jprumeau.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
