@@ -14,7 +14,7 @@ use Zend\View\Exception;
 /**
  * Class PrettyName
  * Beautifies a user name
- * 
+ *
  * @package RumeauLib\View\Helper
  * @method string prettyname() prettyname(mixed $name, int $length = 1, bool $cutLast = true, string $termination = '.') Beautifies a user name
  */

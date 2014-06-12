@@ -11,7 +11,6 @@ namespace RumeauLib\View\Helper;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\I18n\Translator\TranslatorAwareTrait;
 use Zend\View\Helper\AbstractHelper;
-use Zend\View\Renderer\RendererInterface;
 use Zend\View\Helper\EscapeHtml;
 
 
@@ -117,13 +116,9 @@ class PageTitle extends AbstractHelper implements TranslatorAwareInterface
     protected function escape($string)
     {
         if (!$this->escaper) {
-            if ($this->getView() instanceof RendererInterface
-                && method_exists($this->getView(), 'getEncoding')
-            ) {
-                $this->escaper = $this->getView()->plugin('escapeHtml');
-            }
+            $this->escaper = $this->getView()->plugin('escapeHtml');
         }
 
-        return $this->escaper()->escapeHtml((string)$string);
+        return $this->escaper->__invoke((string)$string);
     }
 }
