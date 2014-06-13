@@ -28,7 +28,7 @@ class PageTitle extends AbstractHelper implements TranslatorAwareInterface
     /**
      * Page title template
      */
-    const PAGE_TITLE_TEMPLATE = '<div class="page-header"><h1>%s</h1>%s</div>';
+    const PAGE_TITLE_TEMPLATE = '<div class="page-header"><h1>%s %s</h1></div>';
     /**
      * Page subtitle template
      */
