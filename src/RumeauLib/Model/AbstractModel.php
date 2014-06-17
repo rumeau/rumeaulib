@@ -3,12 +3,13 @@ namespace RumeauLib\Model;
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use DoctrineModule\Persistence\ProvidesObjectManager;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class AbstractModel
  * @package RumeauLib\Model
  */
-abstract class AbstractModel implements ModelInterface, ObjectManagerAwareInterface
+abstract class AbstractModel implements ModelInterface, ObjectManagerAwareInterface, InitializableInterface
 {
     use ProvidesObjectManager;
 
@@ -31,6 +32,12 @@ abstract class AbstractModel implements ModelInterface, ObjectManagerAwareInterf
 
         return $this;
     }
+
+    /**
+     *
+     */
+    public function init()
+    {}
 
     /**
      * @return mixed
