@@ -3,15 +3,21 @@ namespace RumeauLib\Model;
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use DoctrineModule\Persistence\ProvidesObjectManager;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Stdlib\InitializableInterface;
 
 /**
  * Class AbstractModel
  * @package RumeauLib\Model
  */
-abstract class AbstractModel implements ModelInterface, ObjectManagerAwareInterface, InitializableInterface
+abstract class AbstractModel implements ModelInterface,
+    ObjectManagerAwareInterface,
+    ServiceLocatorAwareInterface,
+    InitializableInterface
 {
     use ProvidesObjectManager;
+    use ServiceLocatorAwareTrait;
 
     /**
      * @var array
@@ -37,7 +43,8 @@ abstract class AbstractModel implements ModelInterface, ObjectManagerAwareInterf
      *
      */
     public function init()
-    {}
+    {
+    }
 
     /**
      * @return mixed
