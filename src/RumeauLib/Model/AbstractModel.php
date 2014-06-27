@@ -1,4 +1,14 @@
 <?php
+/**
+ * Created by Jean Rumeau.
+ * User: Jean
+ * Date: 26/06/14
+ * Time: 22:22
+ *
+ * @link
+ * @copyright Copyright (c)
+ * @license   http://opensource.org/licenses/MIT MIT License
+ */
 namespace RumeauLib\Model;
 
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
@@ -18,6 +28,8 @@ abstract class AbstractModel implements ModelInterface,
 {
     use ProvidesObjectManager;
     use ServiceLocatorAwareTrait;
+
+    const PAGINATOR_MAX_RESULTS = 25;
 
     /**
      * @var array
