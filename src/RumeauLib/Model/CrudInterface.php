@@ -41,10 +41,11 @@ interface CrudInterface
     public function update(FormInterface $form, $data = array());
 
     /**
+     * @param               $entity
      * @param FormInterface $form
      * @param array         $data
      *
      * @return mixed
      */
-    public function delete(FormInterface $form, $data = array());
+    public function delete($entity, FormInterface $form, $data = array());
 }
