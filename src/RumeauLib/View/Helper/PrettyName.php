@@ -50,6 +50,8 @@ class PrettyName extends AbstractHelper
             );
         }
 
+        array_walk($name, array($this->getView()->plugin('escapehtml'), '__invoke'));
+
         if ($length === 1) {
             $prettyName = $name[0];
         } else {
