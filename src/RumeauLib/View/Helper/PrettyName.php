@@ -10,6 +10,7 @@ namespace RumeauLib\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Exception;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Class PrettyName
@@ -17,6 +18,7 @@ use Zend\View\Exception;
  *
  * @package RumeauLib\View\Helper
  * @method string prettyname() prettyname(mixed $name, int $length = 1, bool $cutLast = true, string $termination = '.') Beautifies a user name
+ * @method PhpRenderer getView()
  */
 class PrettyName extends AbstractHelper
 {
@@ -51,6 +53,7 @@ class PrettyName extends AbstractHelper
         }
 
         array_walk($name, array($this->getView()->plugin('escapehtml'), '__invoke'));
+        $name = array_filter($name);
 
         if ($length === 1) {
             $prettyName = $name[0];
