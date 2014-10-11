@@ -37,7 +37,7 @@ class Rut extends AbstractValidator
     protected $messageTemplates = array(
         self::RUT_MIN_INVALID => 'El RUT ingresado es menor que %min%',
         self::RUT_MAX_INVALID => 'El RUT ingresado es mayor que %max%',
-        self::RUT_INVALID     => 'El RUT ingresado no es un URT valido'
+        self::RUT_INVALID     => 'El RUT ingresado no es un RUT valido'
     );
 
     /**
