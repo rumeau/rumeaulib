@@ -1,7 +1,7 @@
 <?php
 namespace RumeauLib\Options;
 
-use ZfcUser\Options\ModuleOptions;
+use ZfcUserDoctrineORM\Options\ModuleOptions;
 
 /**
  * Class ZfcUserModuleOptions
