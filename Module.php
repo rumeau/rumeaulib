@@ -30,7 +30,7 @@ class Module implements AutoloaderProviderInterface
                     return new Options\ZfcUserModuleOptions(isset($config['zfcuser']) ? $config['zfcuser'] : array());
                 },
                 'zfcuser_user_mapper' => function ($serviceManager) {
-                    return new Mappper\User(
+                    return new Mapper\User(
                         $serviceManager->get('zfcuser_doctrine_em'),
                         $serviceManager->get('zfcuser_module_options')
                     );
