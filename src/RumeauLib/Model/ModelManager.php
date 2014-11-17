@@ -1,6 +1,7 @@
 <?php
 namespace RumeauLib\Model;
 
+use Zend\Log\LoggerAwareInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,12 +28,14 @@ class ModelManager extends AbstractPluginManager
         parent::__construct($configuration);
 
         $this->addInitializer(array($this, 'injectObjectManager'));
+        $this->addInitializer(array($this, 'injectLogger'));
     }
 
     /**
      * Inject the objectManager to any element that implements ObjectManagerAwareInterface
      *
      * @param $model
+     * @return mixed
      */
     public function injectObjectManager($model)
     {
@@ -44,6 +47,28 @@ class ModelManager extends AbstractPluginManager
                 $model->setObjectManager($objectManager);
             }
         }
+
+        return $model;
+    }
+
+    /**
+     * Injects a Logger instance to the model
+     *
+     * @param $model
+     * @return mixed
+     */
+    public function injectLogger($model)
+    {
+        if ($model instanceof LoggerAwareInterface) {
+            if ($this->serviceLocator instanceof ServiceLocatorInterface
+                && $this->serviceLocator->has('Zend\Log')
+            ) {
+                $logger = $this->getServiceLocator()->get('Zend\Log');
+                $model->setLogger($logger);
+            }
+        }
+
+        return $model;
     }
 
     /**
