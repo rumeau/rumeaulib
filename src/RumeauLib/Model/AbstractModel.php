@@ -42,15 +42,17 @@ abstract class AbstractModel implements ModelInterface,
     protected $entity;
 
     /**
-     * @param $entity
+     * @param null $entity
      */
-    public function __construct($entity)
+    public function __construct($entity = null)
     {
-        if (is_array($entity)) {
-            $entity = array_shift($entity);
-        }
+        if ($entity !== null) {
+            if (is_array($entity)) {
+                $entity = array_shift($entity);
+            }
 
-        $this->setEntity($entity);
+            $this->setEntity($entity);
+        }
 
         return $this;
     }
