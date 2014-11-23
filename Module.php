@@ -2,9 +2,22 @@
 namespace RumeauLib;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\ModuleManager;
 
 class Module implements AutoloaderProviderInterface
 {
+    public function init(ModuleManager $moduleManager)
+    {
+        $sm = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceListener = $sm->get('ServiceListener');
+        $serviceListener->addServiceManager(
+            'ModelManager',
+            'model_manager',
+            'RumeauLib\Model\ModelManagerProviderInterface',
+            'getModelManagerConfig'
+        );
+    }
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
